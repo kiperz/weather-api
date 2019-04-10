@@ -50,17 +50,17 @@ func init() {
 
 	dbName, found = os.LookupEnv("DB_NAME")
 	if !found {
-		dbHost = "weatherapi"
+		dbName = "weatherapi"
 	}
 
 	dbUser, found = os.LookupEnv("DB_USER")
 	if !found {
-		dbHost = "postgres"
+		dbUser = "postgres"
 	}
 
 	dbPassword, found = os.LookupEnv("DB_PASSWORD")
 	if !found {
-		dbHost = "postgres"
+		dbPassword = "postgres"
 	}
 
 	apiKey, found = os.LookupEnv("API_KEY")
@@ -79,9 +79,9 @@ func main() {
 		err error
 	)
 	weatherClient = client.New(apiKey)
-
-	if db, err = sql.Open("postgres", fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=disable", dbHost, dbName, dbUser, dbPassword)); err != nil {
-		fmt.Sprintln("Error ocurred while connecting to database: %s", err)
+	connStr := fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=disable", dbHost, dbName, dbUser, dbPassword)
+	if db, err = sql.Open("postgres", connStr); err != nil {
+		fmt.Sprintln("Error ocurred while connecting to database: %s", err.Error());
 		return
 	}
 

@@ -2,7 +2,9 @@
 
 # Usage
 
-Project assumes user installed docker+docker-compose.
+Project assumes user installed docker and docker-compose.
+
+Setup your API_KEY in .env file
 
 Go to project directory then run
 ```docker-compose up```

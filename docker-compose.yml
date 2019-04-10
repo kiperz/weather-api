@@ -19,16 +19,14 @@ services:
 
   app:
     build: .
-    environment:
-      - DB_HOST=postgres
-    volumes:
-      - ./src:/app
     networks:
       - backend
     depends_on:
       - postgres
     ports:
       - "8080:8080"
+    env_file:
+      - .env
 
 volumes:
   postgres:

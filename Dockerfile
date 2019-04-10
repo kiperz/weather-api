@@ -2,10 +2,12 @@ FROM golang:1.12
 
 RUN mkdir /app
 
-COPY ./src /app
-
 WORKDIR /app
 
-RUN go build
+COPY ./src .
 
-CMD ["/app/weather-api"]
+RUN go build -a -o /app/weather-api
+
+EXPOSE 8080
+
+ENTRYPOINT ["/app/weather-api"]
