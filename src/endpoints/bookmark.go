@@ -27,6 +27,7 @@ func GetBookmark(repository *repositories.PlaceBookmarkRepository) func(w http.R
 			sendError(fmt.Sprintf(`error getting bookmark data: %d`, err.Error()), w, r)
 		}
 		w.WriteHeader(200)
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		render.JSON(w, r, bookmarks)
 	}
 }

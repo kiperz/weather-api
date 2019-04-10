@@ -35,6 +35,7 @@ func GetStatistics(repository *repositories.PlaceQueryRepository) func(w http.Re
 			sendError(fmt.Sprintf(`error getting bookmark data: %d`, err.Error()), w, r)
 		}
 		w.WriteHeader(200)
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		render.JSON(w, r, stats)
 	}
 }
